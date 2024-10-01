@@ -1,7 +1,7 @@
 
 class Board
   # Object variables
-  attr_accessor :state, currplayer
+  attr_accessor :state, :currplayer
 
   # Constructor
   def initialize(player)
@@ -11,8 +11,8 @@ class Board
 
   # Make a move on the board
   def make_move(row, column)
-    state[row][column] = currplayer
-    currplayer == "X" ? currplayer = "O" : currplayer = "X"
+    self.state[row][column] = self.currplayer
+    self.currplayer == "X" ? self.currplayer = "O" : self.currplayer = "X"
   end
 
   # check board for wins
@@ -27,15 +27,15 @@ class Board
     end
     # Check Columns
     for i in 0...3
-      column = [state[0][i], state[1][i], state[2][i]]
+      column = [self.state[0][i], self.state[1][i], self.state[2][i]]
       winner = check_row(column)
       if winner
         return winner
       end
     end
     # Check Diags
-    d1 = [state[0][0],state[1][1],state[2][2]]
-    d2 = [state[2][0],state[1][1],state[0][2]]
+    d1 = [self.state[0][0],self.state[1][1],self.state[2][2]]
+    d2 = [self.state[2][0],self.state[1][1],self.state[0][2]]
 
     winner = check_row(d1)
     if winner
@@ -58,7 +58,7 @@ class Board
       end
       outstring += "\n"
     end
-    puts(outstring)
+    return outstring
   end
 
 
