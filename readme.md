@@ -1,0 +1,2 @@
+## Obinproject Ruby TicTacToe
+This is a simulation of tictactoe implemented in ruby. The game is played in the terminal between two players, each one alternating typing in a board coordinate to place their piece. Game ends with victory for either side or in a tie

@@ -84,6 +84,7 @@ class Board
     
     Current Player: #{self.current_player}"
 
+    return outstr
   end
 
   private
