@@ -11,40 +11,50 @@ class Board
 
   # Make a move on the board
   def make_move(row, column)
-    self.state[row][column] = self.currplayer
+    # Check that the values are in bounds
+    if(row < 0 or row > 2)
+      return false
+    end
+    if(column < 0 or column > 2)
+      return false
+    end
+    # Check that the square is unoccupied
+    if(self.state[row][column] != nil)
+      return false
+    end
+    self.state[row][column] = self.current_player
     self.current_player == "X" ? self.current_player = "O" : self.current_player = "X"
   end
 
-  # check board for wins
-  def check_win()
-    # Check Rows
+  # Check for win condition, return winner, nil otherwise
+  def check_win
+    winner = nil
+    # Check for horizontal win
     self.state.each do |row|
       winner = check_row(row)
-      if winner
+
+      if winner != nil
         return winner
       end
     end
-    # Check Columns
+    # Check for vertical win
     for i in 0...3
-      column = [self.state[0][i], self.state[1][i], self.state[2][i]]
-      winner = check_row(column)
-      if winner
+      r = [self.state[0][i], self.state[1][i], self.state[2][i]]
+      winner = check_row(r)
+      if winner != nil
         return winner
       end
     end
-    # Check Diags
+
+    # Check diagonal win
     d1 = [self.state[0][0],self.state[1][1],self.state[2][2]]
     d2 = [self.state[2][0],self.state[1][1],self.state[0][2]]
-
     winner = check_row(d1)
-    if winner
+    if winner != nil
       return winner
-    else
-      winner = check_row(d2)
-      if winner
-        return winner
-      end
     end
+    winner = check_row(d2)
+    return winner
   end
 
   # To string
@@ -60,25 +70,25 @@ class Board
     return outstring
   end
 
-
   private
-  # Helper to check win, returns winner if any on a given size 3 row
+  #Private helper to check_win
   def check_row(inrow)
-
-    count = {"X" => 0, "O" => 0}
+    counts = {"X" => 0, "O" => 0}
 
     inrow.each do |element|
-      if count.keys.include? element
-        count[element] += 0
+      if(counts.keys.include? element)
+        counts[element] += 1
       end
     end
-    if count["X"] == 3
+    if counts["X"] == 3 
       return "X"
+
     end
-    if count["0"] == 3
+    if counts["O"] == 3
       return "O"
     end
-    return None
+    return nil
   end
+ 
 
 end

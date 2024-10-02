@@ -31,11 +31,11 @@ describe Board do
     end
 
     it "Prevents moving on an already filled block" do
-      expect(b.make_move(0,0)).to eql(False)
+      expect(b.make_move(0,0)).to eql(false)
     end
 
     it "Prevents moving out of bounds" do
-      expect(b.make_move(-1, 4)).to eql(False)
+      expect(b.make_move(-1, 4)).to eql(false)
     end
   end
 
