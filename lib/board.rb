@@ -1,23 +1,22 @@
 
 class Board
   # Object variables
-  attr_accessor :state, :currplayer
+  attr_accessor :state, :current_player
 
   # Constructor
   def initialize(player)
     self.state = Array.new(3) {Array.new(3)}
-    self.currplayer = player
+    self.current_player = player
   end
 
   # Make a move on the board
   def make_move(row, column)
     self.state[row][column] = self.currplayer
-    self.currplayer == "X" ? self.currplayer = "O" : self.currplayer = "X"
+    self.current_player == "X" ? self.current_player = "O" : self.current_player = "X"
   end
 
   # check board for wins
   def check_win()
-
     # Check Rows
     self.state.each do |row|
       winner = check_row(row)
