@@ -46,6 +46,7 @@ describe Board do
     vertical_win = [["O","X",nil], ["O","X",nil], [nil,"X",nil]]
     diagonal_win = [["O","X","X"], [nil,"O","X"], [nil,nil,"O"]]
     no_winner = [[nil,nil,nil], [nil,nil,nil], [nil,nil,nil]]
+    tie_state = [["X","O","X"], ["X","X","O"], ["O","X","O"]]
 
     it "Correctly registers a horizontal win" do
       b.state = horizontal_win
@@ -64,6 +65,10 @@ describe Board do
     it "Correctly registers NO winners" do
       b.state = no_winner
       expect(b.check_win()).to eql(nil)
+    end
+    it "Correctly registers a tie" do
+      b.state = tie_state
+      expect(b.check_win()).to eql("T")
     end
   end
 end

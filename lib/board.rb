@@ -11,6 +11,8 @@ class Board
 
   # Make a move on the board
   def make_move(row, column)
+    row = row.to_i
+    column = column.to_i
     # Check that the values are in bounds
     if(row < 0 or row > 2)
       return false
@@ -54,20 +56,34 @@ class Board
       return winner
     end
     winner = check_row(d2)
+    if winner != nil
+      return winner
+    end
+
+    # Check tie
+    self.state.each do |row|
+      row.each do |element|
+        if element == nil
+          return nil
+        end
+      end
+    end
+    winner = "T"
+
     return winner
+    
   end
 
   # To string
   def to_s
-    outstring = ""
+    outstr = 
+   "       0  1  2 |\n
+    0 | #{self.state[0][0]} | #{self.state[0][1]} | #{self.state[0][2]} |\n
+    1 | #{self.state[1][0]} | #{self.state[1][1]} | #{self.state[1][2]} |\n
+    2 | #{self.state[2][0]} | #{self.state[2][1]} | #{self.state[2][2]} |\n
+    
+    Current Player: #{self.current_player}"
 
-    self.state.each do |row|
-      row.each do |element|
-        ouststring += "|#{element}"
-      end
-      outstring += "\n"
-    end
-    return outstring
   end
 
   private
